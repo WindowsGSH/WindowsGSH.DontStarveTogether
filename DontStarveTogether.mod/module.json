@@ -1,0 +1,405 @@
+{
+  "id": "dont-starve-together",
+  "name": "Dont Starve Together Dedicated Server",
+  "version": "0.1.2",
+  "author": "Shenniko",
+  "description": "WindowsGSH module for installing, configuring, launching, and backing up a Don't Starve Together dedicated server.",
+  "url": "https://github.com/WindowsGSH/WindowsGSH.DontStarveTogether",
+  "homepage": "https://forums.kleientertainment.com/forums/topic/64212-dedicated-server-quick-setup-guide-windows/",
+  "repository": "https://github.com/WindowsGSH/WindowsGSH.DontStarveTogether",
+  "sourceUrl": "https://github.com/WindowsGSH/WindowsGSH.DontStarveTogether",
+  "color": "#1E8449",
+  "type": "csharp",
+  "entry": "WindowsGSH.Modules.DontStarveTogether.DontStarveTogetherModule",
+  "platform": "windows",
+  "source": "https://github.com/WindowsGSH/WindowsGSH.DontStarveTogether",
+  "steam": {
+    "appId": "343050",
+    "anonymous": true,
+    "validate": true
+  },
+  "entryPoints": {
+    "start": "bin64\\dontstarve_dedicated_server_nullrenderer_x64.exe",
+    "processNames": [
+      "dontstarve_dedicated_server_nullrenderer_x64",
+      "dontstarve_dedicated_server_nullrenderer"
+    ]
+  },
+  "runtime": {
+    "allowsEmbeddedConsole": true,
+    "portIncrements": 1,
+    "queryProtocol": "Process",
+    "defaultArguments": "",
+    "stop": {
+      "strategy": "consoleCommands",
+      "commands": [
+        "c_shutdown(true)"
+      ],
+      "waitMilliseconds": 5000,
+      "killAfterTimeout": true
+    }
+  },
+  "capabilities": {
+    "directConnection": true,
+    "consoleCommands": true
+  },
+  "import": {
+    "windowsGsm": {
+      "aliases": [
+        "Don't Starve Together Dedicated Server",
+        "Dont Starve Together Dedicated Server",
+        "WindowsGSM.DontStarveTogether",
+        "DontStarveTogether"
+      ],
+      "installFolder": "serverfiles",
+      "settings": {
+        "servername": "server.name",
+        "serverip": "network.ip",
+        "serverport": "network.port",
+        "servermaxplayer": "server.maxPlayers",
+        "serverpassword": "server.password",
+        "serverparam": "server.additionalArguments"
+      }
+    }
+  },
+  "configFields": [
+    {
+      "key": "server.name",
+      "label": "Server Name",
+      "type": "Text",
+      "defaultValue": "WindowsGSH DST Server",
+      "required": true,
+      "group": "Server",
+      "restartRequired": true
+    },
+    {
+      "key": "server.description",
+      "label": "Description",
+      "type": "Text",
+      "defaultValue": "A Don't Starve Together dedicated server hosted by WindowsGSH.",
+      "group": "Server",
+      "restartRequired": true
+    },
+    {
+      "key": "server.token",
+      "label": "Klei Server Token",
+      "type": "Password",
+      "defaultValue": "",
+      "description": "Cluster token from Klei. Written to cluster_token.txt and never passed on the command line.",
+      "group": "Secrets",
+      "restartRequired": true
+    },
+    {
+      "key": "profile.root",
+      "label": "Klei Profile Root",
+      "type": "Text",
+      "defaultValue": "KleiConfig",
+      "description": "Relative path under the server files folder used with -persistent_storage_root.",
+      "group": "Profile",
+      "restartRequired": true
+    },
+    {
+      "key": "profile.confDir",
+      "label": "Klei Config Directory",
+      "type": "Text",
+      "defaultValue": "DoNotStarveTogether",
+      "group": "Profile",
+      "restartRequired": true
+    },
+    {
+      "key": "cluster.name",
+      "label": "Cluster Name",
+      "type": "Text",
+      "defaultValue": "MyDediServer",
+      "required": true,
+      "group": "Profile",
+      "restartRequired": true
+    },
+    {
+      "key": "shard.enableCaves",
+      "label": "Enable Caves Shard",
+      "type": "Boolean",
+      "defaultValue": true,
+      "description": "Starts a second DST process with -shard Caves and writes Caves/server.ini.",
+      "group": "Shards",
+      "restartRequired": true
+    },
+    {
+      "key": "network.ip",
+      "label": "Server IP",
+      "type": "Text",
+      "defaultValue": "0.0.0.0",
+      "group": "Network",
+      "restartRequired": true
+    },
+    {
+      "key": "network.port",
+      "label": "Server Port",
+      "type": "Port",
+      "defaultValue": 10999,
+      "required": true,
+      "minimum": 1,
+      "maximum": 65535,
+      "group": "Network",
+      "restartRequired": true
+    },
+    {
+      "key": "network.masterServerPort",
+      "label": "Master Server Port",
+      "type": "Port",
+      "defaultValue": 27018,
+      "minimum": 1,
+      "maximum": 65535,
+      "group": "Network",
+      "restartRequired": true
+    },
+    {
+      "key": "network.authenticationPort",
+      "label": "Authentication Port",
+      "type": "Port",
+      "defaultValue": 8768,
+      "minimum": 1,
+      "maximum": 65535,
+      "group": "Network",
+      "restartRequired": true
+    },
+    {
+      "key": "network.cavesPort",
+      "label": "Caves Server Port",
+      "type": "Port",
+      "defaultValue": 10998,
+      "minimum": 1,
+      "maximum": 65535,
+      "group": "Network",
+      "restartRequired": true
+    },
+    {
+      "key": "network.cavesMasterServerPort",
+      "label": "Caves Steam Master Port",
+      "type": "Port",
+      "defaultValue": 27019,
+      "minimum": 1,
+      "maximum": 65535,
+      "group": "Network",
+      "restartRequired": true
+    },
+    {
+      "key": "network.cavesAuthenticationPort",
+      "label": "Caves Authentication Port",
+      "type": "Port",
+      "defaultValue": 8769,
+      "minimum": 1,
+      "maximum": 65535,
+      "group": "Network",
+      "restartRequired": true
+    },
+    {
+      "key": "network.clusterMasterPort",
+      "label": "Cluster Master Port",
+      "type": "Port",
+      "defaultValue": 11000,
+      "minimum": 1,
+      "maximum": 65535,
+      "description": "Internal shard communication port written to cluster.ini.",
+      "group": "Network",
+      "restartRequired": true
+    },
+    {
+      "key": "cluster.key",
+      "label": "Cluster Key",
+      "type": "Password",
+      "defaultValue": "windowsgsh",
+      "description": "Shared secret used by Master and Caves to link shards locally.",
+      "group": "Secrets",
+      "restartRequired": true
+    },
+    {
+      "key": "server.maxPlayers",
+      "label": "Max Players",
+      "type": "Number",
+      "defaultValue": 6,
+      "minimum": 1,
+      "maximum": 64,
+      "group": "Server",
+      "restartRequired": true
+    },
+    {
+      "key": "server.password",
+      "label": "Join Password",
+      "type": "Password",
+      "defaultValue": "",
+      "group": "Server",
+      "restartRequired": true
+    },
+    {
+      "key": "server.gameMode",
+      "label": "Game Mode",
+      "type": "Select",
+      "defaultValue": "Survival",
+      "options": [
+        "Survival",
+        "Relaxed",
+        "Endless",
+        "Wilderness",
+        "Lights Out"
+      ],
+      "group": "World",
+      "restartRequired": true
+    },
+    {
+      "key": "server.intention",
+      "label": "Cluster Intention",
+      "type": "Select",
+      "defaultValue": "cooperative",
+      "options": [
+        "cooperative",
+        "competitive",
+        "social",
+        "madness"
+      ],
+      "group": "World",
+      "restartRequired": true
+    },
+    {
+      "key": "server.pvp",
+      "label": "PvP",
+      "type": "Boolean",
+      "defaultValue": false,
+      "group": "World",
+      "restartRequired": true
+    },
+    {
+      "key": "server.pauseWhenEmpty",
+      "label": "Pause When Empty",
+      "type": "Boolean",
+      "defaultValue": true,
+      "group": "World",
+      "restartRequired": true
+    },
+    {
+      "key": "server.tickRate",
+      "label": "Tick Rate",
+      "type": "Number",
+      "defaultValue": 15,
+      "minimum": 15,
+      "maximum": 60,
+      "description": "DST recommends leaving this at 15 except for LAN-only servers.",
+      "group": "World",
+      "restartRequired": true
+    },
+    {
+      "key": "server.offline",
+      "label": "Offline Mode",
+      "type": "Boolean",
+      "defaultValue": false,
+      "description": "Adds -offline. The server will not be publicly listed.",
+      "group": "Launch",
+      "restartRequired": true
+    },
+    {
+      "key": "server.disableDataCollection",
+      "label": "Disable Data Collection",
+      "type": "Boolean",
+      "defaultValue": false,
+      "description": "Adds -disabledatacollection. Klei notes this limits online service access.",
+      "group": "Launch",
+      "restartRequired": true
+    },
+    {
+      "key": "server.consoleEnabled",
+      "label": "Console Enabled",
+      "type": "Boolean",
+      "defaultValue": true,
+      "group": "Admin",
+      "restartRequired": true
+    },
+    {
+      "key": "server.maxSnapshots",
+      "label": "Max Snapshots",
+      "type": "Number",
+      "defaultValue": 6,
+      "minimum": 1,
+      "maximum": 64,
+      "group": "World",
+      "restartRequired": true
+    },
+    {
+      "key": "worldgen.preset",
+      "label": "Worldgen Preset",
+      "type": "Text",
+      "defaultValue": "SURVIVAL_TOGETHER",
+      "group": "Worldgen",
+      "restartRequired": true
+    },
+    {
+      "key": "worldgen.masterPreset",
+      "label": "Master World Preset",
+      "type": "Text",
+      "defaultValue": "SURVIVAL_TOGETHER",
+      "description": "Writes a simple Master/worldgenoverride.lua preset. Advanced Lua can be edited after install.",
+      "group": "Worldgen",
+      "restartRequired": true
+    },
+    {
+      "key": "worldgen.cavesPreset",
+      "label": "Caves World Preset",
+      "type": "Text",
+      "defaultValue": "DST_CAVE",
+      "description": "Writes Caves/worldgenoverride.lua when the Caves shard is enabled.",
+      "group": "Worldgen",
+      "restartRequired": true
+    },
+    {
+      "key": "mods.workshopIds",
+      "label": "Workshop Mod IDs",
+      "type": "Text",
+      "defaultValue": "",
+      "description": "One ID per line, or separated by commas/spaces. Written to dedicated_server_mods_setup.lua.",
+      "group": "Mods",
+      "restartRequired": true
+    },
+    {
+      "key": "mods.skipUpdate",
+      "label": "Skip Mod Updates",
+      "type": "Boolean",
+      "defaultValue": false,
+      "description": "Adds -skip_update_server_mods.",
+      "group": "Mods",
+      "restartRequired": true
+    },
+    {
+      "key": "server.additionalArguments",
+      "label": "Additional Arguments",
+      "type": "CommandLine",
+      "defaultValue": "",
+      "group": "Launch",
+      "restartRequired": true
+    }
+  ],
+  "configFiles": [
+    "KleiConfig\\DoNotStarveTogether\\<cluster>\\cluster.ini",
+    "KleiConfig\\DoNotStarveTogether\\<cluster>\\cluster_token.txt",
+    "KleiConfig\\DoNotStarveTogether\\<cluster>\\modoverrides.lua",
+    "KleiConfig\\DoNotStarveTogether\\<cluster>\\Master\\server.ini",
+    "KleiConfig\\DoNotStarveTogether\\<cluster>\\Master\\worldgenoverride.lua",
+    "KleiConfig\\DoNotStarveTogether\\<cluster>\\Caves\\server.ini",
+    "KleiConfig\\DoNotStarveTogether\\<cluster>\\Caves\\worldgenoverride.lua",
+    "mods\\dedicated_server_mods_setup.lua"
+  ],
+  "backupTargets": [
+    {
+      "key": "profile",
+      "label": "Klei Profile",
+      "path": "KleiConfig",
+      "type": "directory",
+      "required": true
+    },
+    {
+      "key": "mods",
+      "label": "Workshop Mod Setup",
+      "path": "mods",
+      "type": "directory"
+    }
+  ],
+  "addons": []
+}
