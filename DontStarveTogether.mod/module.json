@@ -9,6 +9,8 @@
   "repository": "https://github.com/WindowsGSH/WindowsGSH.DontStarveTogether",
   "sourceUrl": "https://github.com/WindowsGSH/WindowsGSH.DontStarveTogether",
   "color": "#1E8449",
+  "moduleApiVersion": "1.0",
+  "minimumWindowsGshVersion": "0.1.0",
   "type": "csharp",
   "entry": "WindowsGSH.Modules.DontStarveTogether.DontStarveTogetherModule",
   "platform": "windows",
